@@ -1,6 +1,4 @@
 # Système de Recommandation de Critiques Cinématographiques
-//🤖 FILE README généré par AI en lisant toute la codebase//
-
 
 ## 🚀 Quick Start pour Thibaut
 **Tu peux directement commencer par le fichier `lab_1.ipynb` - ce n'est pas propre mais tu vas comprendre. Merci !**
