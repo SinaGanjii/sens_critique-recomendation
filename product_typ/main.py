@@ -7,6 +7,7 @@ def main():
     preper_data.preper_data()
     preper_data.data["review_content"] = preper_data.data["review_content"].apply(preper_data.clean_special_character)
 
+
     preper_data.transform_data()
     
     print("Système de recommandation prêt!\n")
@@ -23,13 +24,16 @@ def main():
         
         try:
             print(f"\nRecherche de critiques similaires à: '{user_input}'")
-            similar_reviews = preper_data.find_top_5_similar_reviews(user_input)
+            # la on peut manuelement modifier les elment quon veutm je veut mettre ST sur 0,6, et senti sur 0,6 
+            similar_reviews = preper_data.find_top_5_similar_reviews(user_input, similarity_threshold=0.6, sentiment_label_match=True, sentiment_score_threshold=0.6)
             
+            print(f"\nSentiment de votre critique: {similar_reviews.iloc[0]['input_sentiment']} (score: {similar_reviews.iloc[0]['input_sentiment_score']:.3f})")
             print("\nTop 5 critiques similaires:")
             for idx, row in similar_reviews.iterrows():
-                print(f"Score: {row['similarity']:.3f}")
+                print(f"Score de similarité: {row['similarity']:.3f}")
+                print(f"Sentiment: {row['sentiment_label']} (score: {row['sentiment_score']:.3f})")
                 print(f"Critique: {row['review']}")
-            
+                
         except Exception as e:
             print(f"Erreur lors de la recherche: {e}")
         
