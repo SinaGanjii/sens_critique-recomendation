@@ -30,11 +30,21 @@ def main():
     preper_data.transform_data()
     
     print(f"Système de recommandation prêt pour {movie_name}!\n")
+    print("Options disponibles:")
+    print("- Entrez votre critique pour analyser")
+    print("- Tapez 'switch' pour changer de film")
+    print("- Tapez 'exit' pour quitter\n")
+    
     while True:
-        user_input = input(f"Entrez votre critique pour le film {movie_name} (ou 'exit' pour quitter): ").strip()
+        user_input = input(f"Entrez votre critique pour {movie_name}: ").strip()
         
         if user_input.lower() == 'exit':
             print("Au revoir!")
+            break
+        
+        if user_input.lower() == 'switch':
+            print("\nRetour au menu de sélection de film...")
+            main()
             break
         
         if not user_input:
