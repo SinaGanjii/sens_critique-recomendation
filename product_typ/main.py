@@ -2,17 +2,36 @@ from preper_f import PreperData
 import pandas as pd
 
 def main():
-    data = pd.read_csv('fightclub_critiques.csv', encoding="utf-8")
+    print("=== Système de Recommandation de Films ===")
+    print("Choisissez le film:")
+    print("1. Fight Club")
+    print("2. Interstellar")
+    
+    while True:
+        movie_choice = input("Votre choix (1 ou 2): ").strip()
+        if movie_choice == "1":
+            movie_name = "Fight Club"
+            dataset_file = "fightclub_critiques.csv"
+            break
+        elif movie_choice == "2":
+            movie_name = "Interstellar"
+            dataset_file = "interstellar_critique.csv"
+            break
+        else:
+            print("Veuillez choisir 1 ou 2.")
+    
+    print(f"\nChargement des critiques pour {movie_name}...")
+    
+    data = pd.read_csv(dataset_file, encoding="utf-8")
     preper_data = PreperData(data)
     preper_data.preper_data()
     preper_data.data["review_content"] = preper_data.data["review_content"].apply(preper_data.clean_special_character)
 
-
     preper_data.transform_data()
     
-    print("Système de recommandation prêt!\n")
+    print(f"Système de recommandation prêt pour {movie_name}!\n")
     while True:
-        user_input = input("Entrez votre critique pour le film de fightclub (ou 'exit' pour quitter): ").strip()
+        user_input = input(f"Entrez votre critique pour le film {movie_name} (ou 'exit' pour quitter): ").strip()
         
         if user_input.lower() == 'exit':
             print("Au revoir!")
